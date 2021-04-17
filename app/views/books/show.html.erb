@@ -1,11 +1,14 @@
 <div class="post-body">
-  <%= attachment_image_tag @book, :image %>
-  <p>ショップ名：<%= @book.book_name %></p>
-  <p>説明：<%= @book.opinion %></p>
-  <p>投稿ユーザー画像：<%= attachment_image_tag post_image.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %></p>
-  <p>ユーザーネーム：<%= @book.user.name %></p>
-  <p>投稿日時：<%= @book.created_at.strftime('%Y/%m/%d') %></p>
-  <% if @post_image.user == current_user %>
-    <%= link_to "削除", post_image_path(@post_image), method: :delete %>
+
+  <p>投稿ユーザー画像：<%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %></p>
+
+
+  <p>ユーザーネーム：<%= @user.name %></p>
+  <p>Title：<%= @book.book_name %></p>
+  <p>Opinion：<%= @book.opinion %></p>
+
+  <% if @user == current_user %>
+    <%= link_to "Edit", edit_book_path(@book) %>
+    <%= link_to "Destroy", book_path(@user), method: :delete %>
   <% end %>
 </div>

@@ -1,5 +1,5 @@
 <div class="profile-container">
-  <p>投稿ユーザー画像：<%= attachment_image_tag post_image.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %></p>
+  <p>投稿ユーザー画像：<%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %></p>
   <h3 class="profile-name"><%= @user.name %></h3>
   <h3 class ="profile-introduction"><%= @user.introduction %></h3>
 
@@ -8,15 +8,25 @@
   <% end %>
 </div>
 
+<h1>本の感想の投稿フォーム</h1>
+<%= form_with model: @book, local:true do |f| %>
+
+  <h4>本のタイトル</h4>
+  <%= f.text_field :book_name %>
+  <h4>本の感想</h4>
+  <%= f.text_area :opinion %>
+  <%= f.submit '投稿' %>
+<% end %>
+
+
 <% @books.each do |book| %>
 <div>
+  <p>投稿ユーザー画像：<%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"  %></p>
   <%= link_to book_path(book.id) do %>
-    <%= attachment_image_tag book, :image %>
-  <% end %>
-  <p>投稿ユーザー画像：<%= image_tag('sample-author1.jpg') %></p>
   <p>Title：<%= book.book_name %></p>
-  <p>Opinion：<%= post_image.caption %></p>
-  <p>ユーザーネーム：<%= book.user.name %></p>
+  <% end %>
+
+  <p>Opinion：<%= book.opinion %></p>
 </div>
 <% end %>
 <%= paginate @books %>
