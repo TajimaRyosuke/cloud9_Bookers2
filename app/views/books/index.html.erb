@@ -1,8 +1,30 @@
-<% @books.each do |book| %>
-  <p>投稿ユーザー画像：<%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %></p>
-<%= link_to book_path(book.id) do %>
-  <%= book.book_name %>
-<% end %>
-  <%= book.opinion %>
+<%= render 'users/user', user: current_user %>
 
-<% end %>
+<div class="col-md-8 offset-md-1">
+      <h2>Books</h2>
+  <table class="table table-hover table-inverse">
+   <thead>
+    <tr>
+      <th></th>
+      <th>Title</th>
+      <th>Opinion</th>
+      <th colspan="3"></th>
+    </tr>
+   </thead>
+   <tbody>
+    <% @books.each do |book| %>
+      <tr>
+        <td>
+          <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg", class:"attachment user profile_image fallback" %>
+        </td>
+        <td>
+          <%= link_to book_path(book.id) do %>
+          <%= book.book_name %>
+          <% end %>
+        </td>
+        <td><%= book.opinion %></td>
+      </tr>
+    <% end %>
+   </tbody>
+  </table>
+</div>

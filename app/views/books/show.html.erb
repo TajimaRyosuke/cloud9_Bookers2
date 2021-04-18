@@ -1,3 +1,5 @@
+<%= render 'users/user', user: @user %>
+
 <div class="post-body">
 
   <p>投稿ユーザー画像：<%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %></p>
