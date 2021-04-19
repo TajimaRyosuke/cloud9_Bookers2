@@ -1,16 +1,37 @@
-<%= render 'users/user', user: @user %>
+<p id="notice"></p>
+ <%=notice %>
+<div class= "container px-5 px-sm-0">
+  <div class ="row">
 
-<div class="post-body">
+<%= render 'users/user', user: @user, book: @book_new %>
 
-  <p>投稿ユーザー画像：<%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %></p>
-
-
-  <p>ユーザーネーム：<%= @user.name %></p>
-  <p>Title：<%= @book.book_name %></p>
-  <p>Opinion：<%= @book.opinion %></p>
-
-  <% if @user == current_user %>
-    <%= link_to "Edit", edit_book_path(@book) %>
-    <%= link_to "Destroy", book_path(@user), method: :delete %>
-  <% end %>
+    <div class="col-md-8 offset-md-1">
+  		<h2>Book detail</h2>
+  		<table class="table">
+  		  <tbody>
+  		    <tr>
+          <td>
+            <%= link_to user_path(@user.id) do %>
+            <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg", class:"attachment user profile_image fallback" %><br>
+            <%= @user.name %>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to book_path(@book.id) do %>
+            <%= @book.title%>
+            <% end %>
+          </td>
+          <td><%= @book.body %></td>
+          <% if @user == current_user %>
+          <td>
+          <%= link_to "Edit", edit_book_path(@book), class:"btn btn-sm btn-success edit_book_28877" %>
+          </td>
+          <td>
+          <%= link_to "Destroy", book_path(@book), method: :delete ,class:"btn btn-sm btn-danger destroy_book_28862" %></td>
+          <% end %>
+          </td>
+        </tr>
+      </tbody></table>
+    </div>
+  </div>
 </div>

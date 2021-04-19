@@ -5,7 +5,12 @@
       <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0" >
 
         <h2>Sign up</h2>
-
+  <% if @user.errors.any? %>
+  <%= @user.errors.count %>件のエラーが発生しました
+  <% @user.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+  <% end %>
         <form id="new_user" class="new_user" action="/users" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="tQIusJqjPjr/UJCPw/yil8uE9or32o8NpJ+/jKYzy5c4p6v9aY9d66X238B+f8W+0dsrd6COT4aGPXAXs1c4IA==">
         <div class="field">
           <label for="user_name">Name</label><br>

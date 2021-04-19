@@ -17,8 +17,11 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to user_path(@user.id)
+    if @user.update(user_params)
+    redirect_to user_path(@user.id), notice: 'User date was successfully created'
+    else
+    render :edit
+    end
   end
 
 
@@ -29,8 +32,11 @@ class UsersController < ApplicationController
   def create
     @book = Book.new(book_params)
     @book.user_id = current_user.id
-    @book.save
-    redirect_to book_path
+    if@book.save
+    redirect_to book_path, notice: 'Book was successfully created'
+    else
+    render templete: "books/index"
+    end
   end
 
 
@@ -40,7 +46,7 @@ class UsersController < ApplicationController
   end
 
   def book_params
-    params.require(:book).permit(:book_name, :opinion)
+    params.require(:book).permit(:title, :body)
   end
 
 end
