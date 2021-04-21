@@ -1,45 +1,41 @@
-<main>
-        <p id="notice"></p>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0" >
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0">
+      <h2>Sign up</h2>
+      <%= form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
 
-        <h2>Sign up</h2>
-  <% if @user.errors.any? %>
-  <%= @user.errors.count %>件のエラーが発生しました
-  <% @user.errors.full_messages.each do |message| %>
-    <%= message %>
-  <% end %>
-  <% end %>
-        <form id="new_user" class="new_user" action="/users" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="tQIusJqjPjr/UJCPw/yil8uE9or32o8NpJ+/jKYzy5c4p6v9aY9d66X238B+f8W+0dsrd6COT4aGPXAXs1c4IA==">
         <div class="field">
-          <label for="user_name">Name</label><br>
-          <input autofocus="autofocus" class="name" type="text" name="user[name]" id="user_name">
+          <%= f.label :name %><br />
+          <%= f.text_field :name, autofocus: true ,class:"name"%>
         </div>
 
         <div class="field">
-          <label for="user_email">Email</label><br>
-          <input autofocus="autofocus" class="email" type="email" value="" name="user[email]" id="user_email">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" ,class:"email"%>
         </div>
 
         <div class="field">
-          <label for="user_password">Password</label>
-          <em>(6 characters minimum)</em>
-          <br>
-          <input autocomplete="off" class="password" type="password" name="user[password]" id="user_password">
+          <%= f.label :password %>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "new-password" ,class:"password"%>
         </div>
 
         <div class="field">
-          <label for="user_password_confirmation">Password confirmation</label><br>
-          <input autocomplete="off" class="password_confirm" type="password" name="user[password_confirmation]" id="user_password_confirmation">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password" ,class:"password_confirm"%>
         </div>
+
         <div class="actions">
-          <input type="submit" name="commit" value="Sign up" class="btn btn-sm btn-success" data-disable-with="Sign up">
+          <br />
+          <%= f.submit "Sign up", class:"btn btn-sm btn-success" %>
         </div>
-
-        </form>
-        <a href="/users/sign_in">Log in</a><br>
-      </div>
+      <% end %>
+       <a href="/users/sign_in">Log in</a><br>
     </div>
   </div>
-</main>
+</div>
+
+

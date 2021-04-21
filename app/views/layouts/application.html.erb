@@ -13,24 +13,28 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
       <div class="container" >
+        <% if user_signed_in? %>
+        <%= link_to 'Bookers',  destroy_user_session_path, method: :delete,class:"navbar-brand" %>
+        <% else %>
         <a class="navbar-brand" href="/" >
           <span>Bookers</span>
         </a>
         <button class="navbar-toggler" >
         <span class="navbar-toggler-icon"></span>
         </button>
+        <% end %>
 
         <div class="collapse navbar-collapse" >
          <% if user_signed_in? %>
          <ul class="navbar-nav ml-auto">
           <li ><%= link_to ' Home', user_path(current_user.id), class:"fas fa-home nav-link text-light"%></li>
-          <li ><%= link_to ' Users', users_path,class:"fas fa-user-plus nav-link text-light" %></li>
-          <li ><%= link_to ' Books', books_path, class:"fas fa-book nav-link text-light" %></li>
+          <li ><%= link_to ' Users', users_path,class:"fas fa-users nav-link text-light" %></li>
+          <li ><%= link_to ' Books', books_path, class:"fas fa-book-open nav-link text-light" %></li>
           <li ><%= link_to " logout", destroy_user_session_path, method: :delete ,class:"fas fa-sign-out-alt nav-link text-light" %></li>
          <% else %>
         <ul class="navbar-nav ml-auto">
           <li ><%= link_to " Home", root_path, class:"fas fa-home nav-link text-light" %></li>
-          <li ><%= link_to " About", about_path, class:"fas fa-link nav-link text-light" %></li>
+          <li ><%= link_to " About", home_about_path, class:"fas fa-link nav-link text-light" %></li>
           <li ><%= link_to " sign up", new_user_registration_path, class:"fas fa-user-plus nav-link text-light" %></li>
           <li ><%= link_to " login", new_user_session_path, class:"fas fa-sign-in-alt nav-link text-light" %></li>
           </ul>
@@ -38,7 +42,7 @@
         </div>
       </div>
     </nav>
-
+ <%= flash[:notice]%>
      <%= yield %>
 
     <footer>
