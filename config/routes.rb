@@ -11,5 +11,7 @@ Rails.application.routes.draw do
   post 'unfollow/:id' => 'relationships#unfollow', as: 'unfollow' # フォロー外す
   get '/users/:id/following(.:format)' => 'users#following', as: 'following_user'
   get '/users/:id/followers(.:format)' => 'users#followers', as: 'followers_user'
+
+  get 'search' => 'searches#search'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
