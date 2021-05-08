@@ -54,7 +54,11 @@
   </tbody>
 </table>
 
-
+<div id = 'chat_start'>
+  <% if current_user != @user %>
+  <%= link_to 'chatを始める', chat_path(@user.id) %>
+  <% end %>
+</div>
 
 <div class="row">
   <%= link_to '', edit_user_path(user),class:"btn btn-outline-secondary btn-block fas fa-user-cog edit_user_34708" %>

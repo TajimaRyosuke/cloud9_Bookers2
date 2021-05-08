@@ -43,6 +43,9 @@ class User < ApplicationRecord
     end
   end
 
+  has_many :user_rooms
+  has_many :chats
+
   attachment :profile_image
 
   validates :name, presence: true, uniqueness:true, length:{minimum:2,maximum:20}
