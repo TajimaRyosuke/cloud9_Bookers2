@@ -46,6 +46,17 @@ class User < ApplicationRecord
   has_many :user_rooms
   has_many :chats
 
+  include JpPrefecture #gem 'jp_prefecture'の働きで都道府県コードから都道府県名に自動変換ができる
+  jp_prefecture :prefecture_code
+
+  def prefecture_name
+    JpPrefecture::Prefecture.find(code: prefecture_code).try(:name)
+  end
+
+  def prefecture_name=(prefecture_name)
+    self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
+  end
+
   attachment :profile_image
 
   validates :name, presence: true, uniqueness:true, length:{minimum:2,maximum:20}
