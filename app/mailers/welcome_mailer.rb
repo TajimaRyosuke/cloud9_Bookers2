@@ -9,4 +9,9 @@ class WelcomeMailer < ApplicationMailer
     @name = name
     mail to: email, subject: '会員登録が完了いたしました。'
   end
+
+  def notify_user
+        default to: -> { User.pluck(:email) }
+        mail(subject: "Bookers2日報")
+  end
 end

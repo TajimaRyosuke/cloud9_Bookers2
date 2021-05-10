@@ -70,3 +70,4 @@ gem 'font-awesome-sass', '~> 5.13'
 gem 'pry-byebug'
 gem 'jp_prefecture'
 gem 'dotenv-rails'
+gem 'whenever', require: false
