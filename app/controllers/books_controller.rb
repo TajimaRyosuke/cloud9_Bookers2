@@ -6,6 +6,7 @@ class BooksController < ApplicationController
     @users = User.all
     @user = current_user
     @book = Book.new
+    @books_rank =Book.find(Favorite.group(:book_id).order('count(book_id)desc').limit(3))
   end
 
   def new
